@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MonuManage — Software for monument and memorial companies</title>
+<meta name="description" content="Track orders, store proofs, and let families approve designs online. Published pricing, built for monument and memorial companies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="wordmark">Monu<span>Manage</span></a>
+    <div class="nav-links">
+      <a href="#product">Product</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#security">Security</a>
+      <a href="demo.html" class="btn btn-gold nav-cta">Request a demo</a>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-media">
+    <div class="hero-parallax-outer">
+      <div class="hero-parallax">
+        <img class="hero-photo" src="quarry-hero.jpg" alt="A marble quarry at sunrise, terraced stone cut into the mountainside with light breaking through clouds">
+      </div>
+    </div>
+    <canvas class="hero-rain" id="hero-rain" aria-hidden="true"></canvas>
+    <div class="hero-scrim"></div>
+  </div>
+  <div class="wrap">
+    <div class="plaque">
+      <p class="eyebrow on-dark">For monument &amp; memorial companies</p>
+      <h1>Run your shop on one record, not six.</h1>
+      <p class="lede">Track orders from first call to installation. Store every proof and contract against the job. Let families approve a design online instead of over the phone.</p>
+      <div class="hero-ctas">
+        <a href="demo.html" class="btn btn-gold">Request a demo</a>
+        <a href="#pricing" class="btn btn-outline-photo">See pricing</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="problem">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">The problem</p>
+      <h2>Most shops still run on memory.</h2>
+      <p>Spreadsheets track the order. Email tracks the proof. Nobody tracks the phone call where a family says yes.</p>
+    </div>
+    <div class="pain-grid reveal">
+      <div class="pain-card">
+        <p class="num">01</p>
+        <h3>Approvals happen by phone</h3>
+        <p>A family says they never approved that change to the base. Nobody wrote it down, so nobody can prove otherwise.</p>
+      </div>
+      <div class="pain-card">
+        <p class="num">02</p>
+        <h3>Files live in six places</h3>
+        <p>The proof sits in an email thread. The signed contract sits in a drawer. Site photos sit on somebody's phone.</p>
+      </div>
+      <div class="pain-card">
+        <p class="num">03</p>
+        <h3>One person holds the rules</h3>
+        <p>Hillside Cemetery requires flush markers under 24 inches. That fact lives in one employee's head, and she's out sick this week.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="product">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow on-dark">Order tracking</p>
+      <h2>One order. One record. Eight stages.</h2>
+      <p>Every order moves through the same eight stages, in order. Each change gets a timestamp and a name attached automatically, so nobody has to ask who moved what.</p>
+    </div>
+    <div class="stepper-frame reveal">
+      <div class="stepper">
+        <div class="stage"><div class="pin"></div><div class="label">Inquiry</div></div>
+        <div class="stage"><div class="pin"></div><div class="label">Design</div></div>
+        <div class="stage"><div class="pin"></div><div class="label">Proof sent</div></div>
+        <div class="stage"><div class="pin"></div><div class="label">Approved</div></div>
+        <div class="stage"><div class="pin"></div><div class="label">Production</div></div>
+        <div class="stage"><div class="pin"></div><div class="label">Ready to ship</div></div>
+        <div class="stage"><div class="pin"></div><div class="label">Installed</div></div>
+        <div class="stage"><div class="pin"></div><div class="label">Complete</div></div>
+      </div>
+      <p class="stepper-note">Search any order by customer, cemetery, date, or staff member. Every result stays inside your company's own records, never another shop's.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="portal">
+  <div class="wrap">
+    <div class="portal-layout">
+      <div class="portal-copy reveal">
+        <p class="eyebrow">Family portal</p>
+        <h2 style="font-size: clamp(1.7rem, 3vw, 2.35rem); margin-bottom: 20px;">Let families approve a design without a phone call.</h2>
+        <p>Send a secure link. No account, no password required on their end. The family opens it, sees the current proof and the order status, and clicks Approve or Request Changes.</p>
+        <p>Approval carries a timestamp and locks that exact proof version, so there's a record if the question ever comes up again. A revision request opens a comment thread your staff can see directly on the order, instead of a note scribbled after a call.</p>
+      </div>
+      <div class="portal-mock reveal" role="group" aria-label="Preview: what a family sees on the approval portal">
+        <div class="bar"><span>acmemonuments.monumanage.com</span><span>Secure link</span></div>
+        <div class="body">
+          <p class="frame-title">Proof for Margaret R. — Hillcrest Memorial</p>
+          <svg class="monument-svg" width="120" height="90" viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="70" width="100" height="10" fill="#DCD9CE"/>
+            <path d="M30 70 V35 Q30 20 60 20 Q90 20 90 35 V70 Z" fill="#ECEAE2" stroke="#7A7B70" stroke-width="1.5"/>
+            <line x1="42" y1="45" x2="78" y2="45" stroke="#B9843F" stroke-width="1.2"/>
+            <line x1="42" y1="53" x2="78" y2="53" stroke="#B9843F" stroke-width="1.2"/>
+            <line x1="42" y1="61" x2="78" y2="61" stroke="#B9843F" stroke-width="1.2"/>
+          </svg>
+          <div class="status-row"><span>Status</span><span class="status-value">Proof sent</span></div>
+          <div class="actions">
+            <button type="button" class="approve">Approve</button>
+            <button type="button" class="request-changes">Request changes</button>
+          </div>
+          <div class="comment-box">
+            <textarea placeholder="What should change on the proof?" rows="2"></textarea>
+            <button type="button" class="send-comment">Send to shop</button>
+          </div>
+          <p class="comment-sent">Sent — this appears as a comment thread directly on the order for staff to see.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="ai">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow on-dark">AI, by the credit</p>
+      <h2>AI that checks the inscription, not just the spelling.</h2>
+      <p>Every plan runs the full platform without AI. Add credits when you want them, and spend them on whatever catches the most mistakes for your shop.</p>
+    </div>
+    <div class="ai-grid reveal">
+      <div class="ai-card">
+        <div class="token">2-3</div>
+        <h3>Inscription check</h3>
+        <p>Checks inscription text against the family's reference document for misspellings, wrong dates, and formatting errors before the stone goes to production.</p>
+      </div>
+      <div class="ai-card">
+        <div class="token">2-3</div>
+        <h3>Summarization</h3>
+        <p>Turns a forty-message email thread into a three-line summary at the top of the file.</p>
+      </div>
+      <div class="ai-card">
+        <div class="token">1</div>
+        <h3>Smart search</h3>
+        <p>Type "granite bench, Hillcrest, last spring" and get the order, not a list of keyword matches.</p>
+      </div>
+      <div class="ai-card">
+        <div class="token">1</div>
+        <h3>Auto-tagging</h3>
+        <p>New uploads sort into proof, contract, or site photo on their own.</p>
+      </div>
+    </div>
+    <p class="ai-note">A person confirms every flagged issue before it reaches production. The AI never edits an inscription on its own, and credit numbers above are per action.</p>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Pricing</p>
+      <h2>Published prices. No sales call required to see them.</h2>
+      <p>Pick a plan by store count and whether you want AI credits included. Upgrade any time; it takes effect immediately.</p>
+    </div>
+
+    <div class="pricing-scroll reveal">
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th style="background:transparent;"></th>
+            <th>Starter<span class="price">$79/mo</span></th>
+            <th>Single Store<span class="price">$200/mo</span></th>
+            <th class="featured">Single Store + AI<span class="price">$250/mo</span></th>
+            <th>Multi-Location + AI<span class="price">$300/mo</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Storage</th>
+            <td>250 GB</td>
+            <td>2 TB</td>
+            <td>2 TB</td>
+            <td>2 TB, pooled</td>
+          </tr>
+          <tr>
+            <th scope="row">AI credits</th>
+            <td>—</td>
+            <td>—</td>
+            <td>200/mo</td>
+            <td>300/mo</td>
+          </tr>
+          <tr>
+            <th scope="row">Locations</th>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>Up to 5</td>
+          </tr>
+          <tr>
+            <th scope="row">Best for</th>
+            <td>Shops trying dedicated software for the first time</td>
+            <td>Single-location shops past the spreadsheet stage</td>
+            <td>Single-location shops ready for inscription checks and search</td>
+            <td>Multi-location operations with shared reporting</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="addon-strip">
+      <div><strong>+$25</strong> for 50 extra AI credits, any plan with AI</div>
+      <div><strong>+$50/mo</strong> per location beyond a plan's included count</div>
+    </div>
+    <p class="pricing-fine">Storage beyond a plan's limit costs $100 per additional terabyte, on every tier.</p>
+
+    <p class="compare-note">The incumbent in this space charges up to $450 a month and still treats AI as one fixed feature. The newest entrant keeps AI front and center but not much else. MonuManage publishes every number on this page and lets AI power inscription checks, search, and summarization from a shared credit pool, not one bolted-on checkbox.</p>
+  </div>
+</section>
+
+<section class="section" id="security">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Security</p>
+      <h2>Your data, and your families' data, kept separate by company.</h2>
+    </div>
+    <ul class="security-list reveal">
+      <li>Every query filtered by company, enforced on the server, never trusted from the browser.</li>
+      <li>Data encrypted in transit and at rest, on every plan.</li>
+      <li>Multi-factor authentication required for owner and admin accounts.</li>
+      <li>Backups encrypted and restore-tested on a fixed schedule, not just taken and assumed to work.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cta-final reveal">
+  <div class="wrap">
+    <h2>See it running on your own orders, not a canned script.</h2>
+    <a href="demo.html" class="btn btn-gold">Request a demo</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <a href="index.html" class="wordmark" style="color:#F1EEE6;">MonuManage</a>
+    <div class="footer-links">
+      <a href="#pricing">Pricing</a>
+      <a href="#security">Security</a>
+      <a href="demo.html">Request a demo</a>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie preferences">
+  <p>This site uses local storage to remember one thing: your light/dark preference. There's no tracking or advertising, and nothing is sent to a third party. Decline and the toggle still works — it just won't stick between visits.</p>
+  <div class="cookie-actions">
+    <button type="button" class="cookie-decline">Decline</button>
+    <button type="button" class="cookie-accept">Accept</button>
+  </div>
+</div>
+
+<script src="site.js"></script>
+</body>
+</html>
