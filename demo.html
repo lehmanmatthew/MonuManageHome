@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a demo — MonuManage</title>
+<meta name="description" content="Request a 30-minute demo of MonuManage, sized to your shop's order volume and location count.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="wordmark">Monu<span>Manage</span></a>
+    <div class="nav-links">
+      <a href="index.html#product">Product</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#security">Security</a>
+      <a href="demo.html" class="btn btn-brass nav-cta">Request a demo</a>
+    </div>
+  </div>
+</nav>
+
+<header class="demo-hero">
+  <div class="wrap">
+    <p class="eyebrow">Request a demo</p>
+    <h1>See MonuManage running on a shop like yours.</h1>
+    <p class="lede">Thirty minutes. We'll walk through order tracking, the family portal, and pricing sized to your location count, then answer whatever you ask.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="demo-layout">
+
+    <div class="form-card" id="form-card">
+      <div class="field-set">
+        <h2>Tell us about your shop</h2>
+        <p class="form-sub">We reply within one business day to schedule a time.</p>
+
+        <form id="demo-form" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="company">Company name</label>
+              <input type="text" id="company" name="company" required autocomplete="organization">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="role">Your role</label>
+              <select id="role" name="role">
+                <option value="owner">Owner / Admin</option>
+                <option value="sales">Sales</option>
+                <option value="production">Production / Design</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="locations">Number of locations</label>
+              <select id="locations" name="locations">
+                <option value="1">1</option>
+                <option value="2-4">2–4</option>
+                <option value="5+">5 or more</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="current">Current software <span class="hint">(optional)</span></label>
+            <input type="text" id="current" name="current" placeholder="Spreadsheets, a competitor, nothing yet">
+          </div>
+
+          <div class="field">
+            <label for="message">Anything you want us to cover <span class="hint">(optional)</span></label>
+            <textarea id="message" name="message" placeholder="Multi-location reporting, the family portal, migrating from another tool..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-brass form-submit">Request a demo</button>
+          <p class="form-note">No credit card. No obligation. Just a working demo.</p>
+        </form>
+      </div>
+
+      <div class="success-panel" id="success-panel">
+        <div class="mark">&#10003;</div>
+        <h2>Request received.</h2>
+        <p>We'll email you within one business day to schedule a time that works for your shop.</p>
+        <a href="index.html" class="btn btn-outline">Back to homepage</a>
+      </div>
+    </div>
+
+    <aside class="next-card">
+      <h2>What happens next</h2>
+      <ol class="next-list">
+        <li>We reply within one business day.</li>
+        <li>A 30-minute call, screen-shared, on your schedule.</li>
+        <li>We show your own order types, not a generic script.</li>
+        <li>You get pricing sized to your location count, in writing.</li>
+      </ol>
+      <p class="assoc">MBNA and OMBA members: mention your membership on the call.</p>
+    </aside>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <a href="index.html" class="wordmark" style="color:var(--stone-dim);">MonuManage</a>
+    <div class="footer-links">
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#security">Security</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('demo-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  if (!this.checkValidity()) {
+    this.reportValidity();
+    return;
+  }
+  document.getElementById('form-card').classList.add('submitted');
+  document.getElementById('success-panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+</script>
+
+</body>
+</html>
