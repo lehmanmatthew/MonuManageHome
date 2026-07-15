@@ -19,7 +19,11 @@
       <a href="index.html#product">Product</a>
       <a href="index.html#pricing">Pricing</a>
       <a href="index.html#security">Security</a>
-      <a href="demo.html" class="btn btn-brass nav-cta">Request a demo</a>
+      <a href="demo.html" class="btn btn-gold nav-cta">Request a demo</a>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -40,7 +44,9 @@
         <h2>Tell us about your shop</h2>
         <p class="form-sub">We reply within one business day to schedule a time.</p>
 
-        <form id="demo-form" novalidate>
+        <div class="form-error" id="form-error">Something went wrong sending this. Try again, or email us directly.</div>
+
+        <form id="demo-form" action="https://formspree.io/f/xreneqgr" method="POST" novalidate>
           <div class="field-row">
             <div class="field">
               <label for="name">Full name</label>
@@ -93,7 +99,7 @@
             <textarea id="message" name="message" placeholder="Multi-location reporting, the family portal, migrating from another tool..."></textarea>
           </div>
 
-          <button type="submit" class="btn btn-brass form-submit">Request a demo</button>
+          <button type="submit" class="btn btn-gold form-submit">Request a demo</button>
           <p class="form-note">No credit card. No obligation. Just a working demo.</p>
         </form>
       </div>
@@ -114,7 +120,6 @@
         <li>We show your own order types, not a generic script.</li>
         <li>You get pricing sized to your location count, in writing.</li>
       </ol>
-      <p class="assoc">MBNA and OMBA members: mention your membership on the call.</p>
     </aside>
 
   </div>
@@ -122,7 +127,7 @@
 
 <footer class="footer">
   <div class="wrap">
-    <a href="index.html" class="wordmark" style="color:var(--stone-dim);">MonuManage</a>
+    <a href="index.html" class="wordmark" style="color:#F1EEE6;">MonuManage</a>
     <div class="footer-links">
       <a href="index.html#pricing">Pricing</a>
       <a href="index.html#security">Security</a>
@@ -130,17 +135,6 @@
   </div>
 </footer>
 
-<script>
-document.getElementById('demo-form').addEventListener('submit', function (e) {
-  e.preventDefault();
-  if (!this.checkValidity()) {
-    this.reportValidity();
-    return;
-  }
-  document.getElementById('form-card').classList.add('submitted');
-  document.getElementById('success-panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
-});
-</script>
-
+<script src="site.js"></script>
 </body>
 </html>

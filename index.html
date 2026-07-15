@@ -19,20 +19,33 @@
       <a href="#product">Product</a>
       <a href="#pricing">Pricing</a>
       <a href="#security">Security</a>
-      <a href="demo.html" class="btn btn-brass nav-cta">Request a demo</a>
+      <a href="demo.html" class="btn btn-gold nav-cta">Request a demo</a>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+      </button>
     </div>
   </div>
 </nav>
 
 <header class="hero">
+  <div class="hero-media">
+    <div class="hero-parallax-outer">
+      <div class="hero-parallax">
+        <img class="hero-photo" src="quarry-hero.jpg" alt="A marble quarry at sunrise, terraced stone cut into the mountainside with light breaking through clouds">
+      </div>
+    </div>
+    <canvas class="hero-rain" id="hero-rain" aria-hidden="true"></canvas>
+    <div class="hero-scrim"></div>
+  </div>
   <div class="wrap">
     <div class="plaque">
       <p class="eyebrow on-dark">For monument &amp; memorial companies</p>
       <h1>Run your shop on one record, not six.</h1>
       <p class="lede">Track orders from first call to installation. Store every proof and contract against the job. Let families approve a design online instead of over the phone.</p>
       <div class="hero-ctas">
-        <a href="demo.html" class="btn btn-brass">Request a demo</a>
-        <a href="#pricing" class="btn btn-outline-dark">See pricing</a>
+        <a href="demo.html" class="btn btn-gold">Request a demo</a>
+        <a href="#pricing" class="btn btn-outline-photo">See pricing</a>
       </div>
     </div>
   </div>
@@ -40,12 +53,12 @@
 
 <section class="section" id="problem">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">The problem</p>
       <h2>Most shops still run on memory.</h2>
       <p>Spreadsheets track the order. Email tracks the proof. Nobody tracks the phone call where a family says yes.</p>
     </div>
-    <div class="pain-grid">
+    <div class="pain-grid reveal">
       <div class="pain-card">
         <p class="num">01</p>
         <h3>Approvals happen by phone</h3>
@@ -67,12 +80,12 @@
 
 <section class="section section-dark" id="product">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow on-dark">Order tracking</p>
       <h2>One order. One record. Eight stages.</h2>
       <p>Every order moves through the same eight stages, in order. Each change gets a timestamp and a name attached automatically, so nobody has to ask who moved what.</p>
     </div>
-    <div class="stepper-frame">
+    <div class="stepper-frame reveal">
       <div class="stepper">
         <div class="stage"><div class="pin"></div><div class="label">Inquiry</div></div>
         <div class="stage"><div class="pin"></div><div class="label">Design</div></div>
@@ -91,22 +104,22 @@
 <section class="section" id="portal">
   <div class="wrap">
     <div class="portal-layout">
-      <div class="portal-copy">
+      <div class="portal-copy reveal">
         <p class="eyebrow">Family portal</p>
         <h2 style="font-size: clamp(1.7rem, 3vw, 2.35rem); margin-bottom: 20px;">Let families approve a design without a phone call.</h2>
         <p>Send a secure link. No account, no password required on their end. The family opens it, sees the current proof and the order status, and clicks Approve or Request Changes.</p>
         <p>Approval carries a timestamp and locks that exact proof version, so there's a record if the question ever comes up again. A revision request opens a comment thread your staff can see directly on the order, instead of a note scribbled after a call.</p>
       </div>
-      <div class="portal-mock" aria-hidden="true">
+      <div class="portal-mock reveal" aria-hidden="true">
         <div class="bar"><span>acmemonuments.monumanage.com</span><span>Secure link</span></div>
         <div class="body">
           <p class="frame-title">Proof for Margaret R. — Hillcrest Memorial</p>
           <svg class="monument-svg" width="120" height="90" viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="10" y="70" width="100" height="10" fill="#DCD9CE"/>
             <path d="M30 70 V35 Q30 20 60 20 Q90 20 90 35 V70 Z" fill="#ECEAE2" stroke="#7A7B70" stroke-width="1.5"/>
-            <line x1="42" y1="45" x2="78" y2="45" stroke="#A9824C" stroke-width="1.2"/>
-            <line x1="42" y1="53" x2="78" y2="53" stroke="#A9824C" stroke-width="1.2"/>
-            <line x1="42" y1="61" x2="78" y2="61" stroke="#A9824C" stroke-width="1.2"/>
+            <line x1="42" y1="45" x2="78" y2="45" stroke="#B9843F" stroke-width="1.2"/>
+            <line x1="42" y1="53" x2="78" y2="53" stroke="#B9843F" stroke-width="1.2"/>
+            <line x1="42" y1="61" x2="78" y2="61" stroke="#B9843F" stroke-width="1.2"/>
           </svg>
           <div class="status-row"><span>Status</span><span>Proof sent</span></div>
           <div class="actions">
@@ -121,12 +134,12 @@
 
 <section class="section section-dark" id="ai">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow on-dark">AI, by the credit</p>
       <h2>AI that checks the inscription, not just the spelling.</h2>
       <p>Every plan runs the full platform without AI. Add credits when you want them, and spend them on whatever catches the most mistakes for your shop.</p>
     </div>
-    <div class="ai-grid">
+    <div class="ai-grid reveal">
       <div class="ai-card">
         <div class="token">2-3</div>
         <h3>Inscription check</h3>
@@ -154,13 +167,13 @@
 
 <section class="section" id="pricing">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">Pricing</p>
       <h2>Published prices. No sales call required to see them.</h2>
       <p>Pick a plan by store count and whether you want AI credits included. Upgrade any time; it takes effect immediately.</p>
     </div>
 
-    <div class="pricing-scroll">
+    <div class="pricing-scroll reveal">
       <table class="pricing-table">
         <thead>
           <tr>
@@ -216,30 +229,29 @@
 
 <section class="section" id="security">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">Security</p>
       <h2>Your data, and your families' data, kept separate by company.</h2>
     </div>
-    <ul class="security-list">
+    <ul class="security-list reveal">
       <li>Every query filtered by company, enforced on the server, never trusted from the browser.</li>
       <li>Data encrypted in transit and at rest, on every plan.</li>
       <li>Multi-factor authentication required for owner and admin accounts.</li>
       <li>Backups encrypted and restore-tested on a fixed schedule, not just taken and assumed to work.</li>
     </ul>
-    <p class="assoc-line">MonuManage attends MBNA and OMBA events. If you're a member of either, mention it on your demo call.</p>
   </div>
 </section>
 
-<section class="cta-final">
+<section class="cta-final reveal">
   <div class="wrap">
     <h2>See it running on your own orders, not a canned script.</h2>
-    <a href="demo.html" class="btn btn-brass">Request a demo</a>
+    <a href="demo.html" class="btn btn-gold">Request a demo</a>
   </div>
 </section>
 
 <footer class="footer">
   <div class="wrap">
-    <a href="index.html" class="wordmark" style="color:var(--stone-dim);">MonuManage</a>
+    <a href="index.html" class="wordmark" style="color:#F1EEE6;">MonuManage</a>
     <div class="footer-links">
       <a href="#pricing">Pricing</a>
       <a href="#security">Security</a>
@@ -248,5 +260,6 @@
   </div>
 </footer>
 
+<script src="site.js"></script>
 </body>
 </html>
