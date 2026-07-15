@@ -8,9 +8,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<div class="scroll-progress" aria-hidden="true"></div>
 
 <nav class="nav">
   <div class="wrap">
@@ -112,7 +120,7 @@
       </div>
     </div>
 
-    <aside class="next-card">
+    <aside class="next-card reveal">
       <h2>What happens next</h2>
       <ol class="next-list">
         <li>We reply within one business day.</li>
@@ -134,6 +142,14 @@
     </div>
   </div>
 </footer>
+
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie preferences">
+  <p>This site uses local storage to remember one thing: your light/dark preference. There's no tracking or advertising, and nothing is sent to a third party. Decline and the toggle still works — it just won't stick between visits.</p>
+  <div class="cookie-actions">
+    <button type="button" class="cookie-decline">Decline</button>
+    <button type="button" class="cookie-accept">Accept</button>
+  </div>
+</div>
 
 <script src="site.js"></script>
 </body>

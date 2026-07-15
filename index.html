@@ -8,9 +8,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<div class="scroll-progress" aria-hidden="true"></div>
 
 <nav class="nav">
   <div class="wrap">
@@ -110,7 +118,7 @@
         <p>Send a secure link. No account, no password required on their end. The family opens it, sees the current proof and the order status, and clicks Approve or Request Changes.</p>
         <p>Approval carries a timestamp and locks that exact proof version, so there's a record if the question ever comes up again. A revision request opens a comment thread your staff can see directly on the order, instead of a note scribbled after a call.</p>
       </div>
-      <div class="portal-mock reveal" aria-hidden="true">
+      <div class="portal-mock reveal" role="group" aria-label="Preview: what a family sees on the approval portal">
         <div class="bar"><span>acmemonuments.monumanage.com</span><span>Secure link</span></div>
         <div class="body">
           <p class="frame-title">Proof for Margaret R. — Hillcrest Memorial</p>
@@ -121,11 +129,16 @@
             <line x1="42" y1="53" x2="78" y2="53" stroke="#B9843F" stroke-width="1.2"/>
             <line x1="42" y1="61" x2="78" y2="61" stroke="#B9843F" stroke-width="1.2"/>
           </svg>
-          <div class="status-row"><span>Status</span><span>Proof sent</span></div>
+          <div class="status-row"><span>Status</span><span class="status-value">Proof sent</span></div>
           <div class="actions">
-            <button class="approve">Approve</button>
-            <button>Request changes</button>
+            <button type="button" class="approve">Approve</button>
+            <button type="button" class="request-changes">Request changes</button>
           </div>
+          <div class="comment-box">
+            <textarea placeholder="What should change on the proof?" rows="2"></textarea>
+            <button type="button" class="send-comment">Send to shop</button>
+          </div>
+          <p class="comment-sent">Sent — this appears as a comment thread directly on the order for staff to see.</p>
         </div>
       </div>
     </div>
@@ -259,6 +272,14 @@
     </div>
   </div>
 </footer>
+
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie preferences">
+  <p>This site uses local storage to remember one thing: your light/dark preference. There's no tracking or advertising, and nothing is sent to a third party. Decline and the toggle still works — it just won't stick between visits.</p>
+  <div class="cookie-actions">
+    <button type="button" class="cookie-decline">Decline</button>
+    <button type="button" class="cookie-accept">Accept</button>
+  </div>
+</div>
 
 <script src="site.js"></script>
 </body>

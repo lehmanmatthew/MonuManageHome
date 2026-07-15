@@ -3,11 +3,51 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------------- cookie consent ----------------
+     Nothing on this site tracks visitors. The only thing consent gates is
+     whether the theme choice below is allowed to persist in localStorage
+     across visits — that's the "storage" the banner is telling people
+     about. Decline, and the toggle still works, it just resets on
+     reload. */
+  var CONSENT_KEY = "mm-cookie-consent";
+  var THEME_KEY = "mm-theme";
+
+  function getConsent() {
+    try { return window.localStorage.getItem(CONSENT_KEY); }
+    catch (e) { return null; }
+  }
+
+  function setConsent(value) {
+    try { window.localStorage.setItem(CONSENT_KEY, value); }
+    catch (e) { /* storage unavailable, banner just won't reappear this tab */ }
+  }
+
+  var banner = document.getElementById("cookie-banner");
+  if (banner) {
+    var existingConsent = getConsent();
+    if (!existingConsent) {
+      window.setTimeout(function () { banner.classList.add("is-visible"); }, 900);
+    }
+    var acceptBtn = banner.querySelector(".cookie-accept");
+    var declineBtn = banner.querySelector(".cookie-decline");
+    if (acceptBtn) {
+      acceptBtn.addEventListener("click", function () {
+        setConsent("accepted");
+        banner.classList.remove("is-visible");
+      });
+    }
+    if (declineBtn) {
+      declineBtn.addEventListener("click", function () {
+        setConsent("declined");
+        try { window.localStorage.removeItem(THEME_KEY); } catch (e) {}
+        banner.classList.remove("is-visible");
+      });
+    }
+  }
+
   /* ---------------- theme toggle ----------------
-     Follows system preference on load. Toggling only changes the current
-     page view (no localStorage/cookies), since this runs inside a chat
-     preview sandbox — wire up persistence once it's hosted on your own
-     domain if you want the choice to stick across visits. */
+     Reads a saved preference first, falls back to system preference.
+     Only writes to localStorage once cookie consent has been accepted. */
   var root = document.documentElement;
   var toggle = document.querySelector(".theme-toggle");
 
@@ -16,13 +56,67 @@
     else root.removeAttribute("data-theme");
   }
 
+  function getSavedTheme() {
+    try { return window.localStorage.getItem(THEME_KEY); }
+    catch (e) { return null; }
+  }
+
+  function saveTheme(mode) {
+    if (getConsent() !== "accepted") return;
+    try { window.localStorage.setItem(THEME_KEY, mode); }
+    catch (e) { /* ignore */ }
+  }
+
+  var savedTheme = getSavedTheme();
   var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  setTheme(prefersDark ? "dark" : "light");
+  setTheme(savedTheme ? savedTheme : (prefersDark ? "dark" : "light"));
 
   if (toggle) {
     toggle.addEventListener("click", function () {
       var isDark = root.getAttribute("data-theme") === "dark";
-      setTheme(isDark ? "light" : "dark");
+      var next = isDark ? "light" : "dark";
+      if (!reduceMotion) {
+        toggle.classList.add("is-switching");
+        window.setTimeout(function () { toggle.classList.remove("is-switching"); }, 260);
+      }
+      setTheme(next);
+      saveTheme(next);
+    });
+  }
+
+  /* ---------------- nav scroll state + scroll progress ---------------- */
+  var navEl = document.querySelector(".nav");
+  var progressEl = document.querySelector(".scroll-progress");
+
+  function onScrollChrome() {
+    if (navEl) {
+      if (window.scrollY > 8) navEl.classList.add("is-scrolled");
+      else navEl.classList.remove("is-scrolled");
+    }
+    if (progressEl) {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - doc.clientHeight;
+      var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progressEl.style.width = pct + "%";
+    }
+  }
+  onScrollChrome();
+  window.addEventListener("scroll", onScrollChrome, { passive: true });
+
+  /* ---------------- button ripple ---------------- */
+  if (!reduceMotion) {
+    document.querySelectorAll(".btn").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        var rect = btn.getBoundingClientRect();
+        var size = Math.max(rect.width, rect.height) * 1.4;
+        var span = document.createElement("span");
+        span.className = "ripple";
+        span.style.width = span.style.height = size + "px";
+        span.style.left = (e.clientX - rect.left - size / 2) + "px";
+        span.style.top = (e.clientY - rect.top - size / 2) + "px";
+        btn.appendChild(span);
+        window.setTimeout(function () { span.remove(); }, 620);
+      });
     });
   }
 
@@ -81,6 +175,42 @@
         raf = null;
       }
     }
+  }
+
+  /* ---------------- hero parallax (scroll-driven) ----------------
+     As the page scrolls past the hero, the photo drifts and dims a touch
+     faster than the page itself, and the plaque eases up and fades —
+     a quieter cousin of the mouse-driven nudge above. Skipped on the
+     mobile layout, where the hero is a static, fully-visible photo. */
+  var heroMedia = document.querySelector(".hero-media");
+  var plaqueEl = document.querySelector(".plaque");
+  var mobileHeroQuery = window.matchMedia("(max-width: 700px)");
+
+  if (heroEl && (heroMedia || plaqueEl) && !reduceMotion) {
+    var heroRaf = null;
+    function updateHeroScroll() {
+      heroRaf = null;
+      if (mobileHeroQuery.matches) {
+        if (heroMedia) heroMedia.style.transform = "";
+        if (heroMedia) heroMedia.style.opacity = "";
+        if (plaqueEl) { plaqueEl.style.transform = ""; plaqueEl.style.opacity = ""; }
+        return;
+      }
+      var rect = heroEl.getBoundingClientRect();
+      var progress = Math.min(Math.max(-rect.top / rect.height, 0), 1);
+      if (heroMedia) {
+        heroMedia.style.transform = "translate3d(0, " + (progress * 60).toFixed(1) + "px, 0)";
+        heroMedia.style.opacity = String(1 - progress * 0.5);
+      }
+      if (plaqueEl) {
+        plaqueEl.style.transform = "translate3d(0, " + (progress * -28).toFixed(1) + "px, 0)";
+        plaqueEl.style.opacity = String(1 - progress * 0.9);
+      }
+    }
+    window.addEventListener("scroll", function () {
+      if (!heroRaf) heroRaf = requestAnimationFrame(updateHeroScroll);
+    }, { passive: true });
+    updateHeroScroll();
   }
 
   /* ---------------- rain over the hero photo ---------------- */
@@ -144,6 +274,67 @@
     requestAnimationFrame(loop);
   }
 
+  /* ---------------- family portal mock: working buttons ----------------
+     This mirrors what a family sees on the real portal link: Approve
+     locks in the proof and updates the status; Request changes opens a
+     short comment field. Nothing here submits anywhere — it's a preview
+     of the interaction, scoped to this page. */
+  var portalMock = document.querySelector(".portal-mock");
+  if (portalMock) {
+    var statusValue = portalMock.querySelector(".status-value");
+    var approveBtn = portalMock.querySelector(".approve");
+    var changesBtn = portalMock.querySelector(".request-changes");
+    var commentBox = portalMock.querySelector(".comment-box");
+    var commentSend = portalMock.querySelector(".send-comment");
+    var commentSent = portalMock.querySelector(".comment-sent");
+    var commentTextarea = portalMock.querySelector(".comment-box textarea");
+
+    function setStatus(text, kind) {
+      if (!statusValue) return;
+      statusValue.textContent = text;
+      statusValue.classList.remove("is-approved", "is-flagged");
+      if (kind) statusValue.classList.add(kind);
+    }
+
+    if (approveBtn) {
+      approveBtn.addEventListener("click", function () {
+        if (approveBtn.disabled) return;
+        approveBtn.disabled = true;
+        approveBtn.textContent = "Approved ✓";
+        approveBtn.classList.add("is-done");
+        if (changesBtn) changesBtn.disabled = true;
+        setStatus("Approved", "is-approved");
+        if (commentBox) commentBox.classList.remove("is-open");
+      });
+    }
+
+    if (changesBtn) {
+      changesBtn.addEventListener("click", function () {
+        if (changesBtn.disabled || !commentBox) return;
+        commentBox.classList.toggle("is-open");
+        if (commentBox.classList.contains("is-open") && commentTextarea) {
+          window.setTimeout(function () { commentTextarea.focus(); }, 180);
+        }
+      });
+    }
+
+    if (commentSend) {
+      commentSend.addEventListener("click", function () {
+        if (commentTextarea && !commentTextarea.value.trim()) {
+          commentTextarea.focus();
+          return;
+        }
+        setStatus("Changes requested", "is-flagged");
+        if (commentBox) commentBox.classList.remove("is-open");
+        if (commentSent) {
+          commentSent.classList.add("is-visible");
+          window.setTimeout(function () { commentSent.classList.remove("is-visible"); }, 3200);
+        }
+        if (commentTextarea) commentTextarea.value = "";
+      });
+    }
+  }
+
   /* ---------------- demo form → Formspree ---------------- */
   var form = document.getElementById("demo-form");
   if (form) {
@@ -159,7 +350,10 @@
       }
 
       if (errorBox) errorBox.classList.remove("is-visible");
-      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending…"; }
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner"></span> Sending…';
+      }
 
       fetch(form.action, {
         method: "POST",
