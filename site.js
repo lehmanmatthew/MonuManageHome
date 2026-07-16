@@ -2,6 +2,13 @@
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Mouse-parallax and the rain canvas are desktop flourishes — on a
+  // touch device they either never fire (mousemove) or just burn
+  // battery and compete with scrolling for the main thread, which is
+  // what makes the hero feel janky/heavy on phones. Treat coarse
+  // pointers and narrow viewports the same as reduced motion for
+  // those two effects.
+  var isCoarsePointer = window.matchMedia("(pointer: coarse)").matches || window.innerWidth <= 760;
 
   /* ---------------- cookie consent ----------------
      Nothing on this site tracks visitors. The only thing consent gates is
@@ -126,21 +133,35 @@
   /* ---------------- nav scroll state + scroll progress ---------------- */
   var navEl = document.querySelector(".nav");
   var progressEl = document.querySelector(".scroll-progress");
+  var navIsScrolled = false;
+  var chromeRaf = null;
 
   function onScrollChrome() {
+    chromeRaf = null;
+    var y = window.scrollY;
     if (navEl) {
-      if (window.scrollY > 8) navEl.classList.add("is-scrolled");
-      else navEl.classList.remove("is-scrolled");
+      // Hysteresis (enter above 32px, leave below 12px) instead of a
+      // single threshold, so scroll jitter right at one value can't
+      // flip the class back and forth every frame.
+      if (!navIsScrolled && y > 32) {
+        navIsScrolled = true;
+        navEl.classList.add("is-scrolled");
+      } else if (navIsScrolled && y < 12) {
+        navIsScrolled = false;
+        navEl.classList.remove("is-scrolled");
+      }
     }
     if (progressEl) {
       var doc = document.documentElement;
       var max = doc.scrollHeight - doc.clientHeight;
-      var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      var pct = max > 0 ? (y / max) * 100 : 0;
       progressEl.style.width = pct + "%";
     }
   }
   onScrollChrome();
-  window.addEventListener("scroll", onScrollChrome, { passive: true });
+  window.addEventListener("scroll", function () {
+    if (!chromeRaf) chromeRaf = requestAnimationFrame(onScrollChrome);
+  }, { passive: true });
 
   /* ---------------- button ripple ---------------- */
   if (!reduceMotion) {
@@ -185,7 +206,7 @@
   var heroOuter = document.querySelector(".hero-parallax-outer");
   var heroEl = document.querySelector(".hero");
 
-  if (heroOuter && heroEl && !reduceMotion) {
+  if (heroOuter && heroEl && !reduceMotion && !isCoarsePointer) {
     var targetX = 0, targetY = 0, curX = 0, curY = 0;
     var raf = null;
 
@@ -246,7 +267,7 @@
 
   /* ---------------- rain over the hero photo ---------------- */
   var canvas = document.getElementById("hero-rain");
-  if (canvas && !reduceMotion) {
+  if (canvas && !reduceMotion && !isCoarsePointer) {
     var ctx = canvas.getContext("2d");
     var drops = [];
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
