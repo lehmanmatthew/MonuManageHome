@@ -42,7 +42,7 @@
   --panel-rgb: 26, 27, 25;
   --ink: #EDE9DD;
   --slate: #B7B2A0;
-  --slate-soft: #857F6E;
+  --slate-soft: #948D79;
   --line: #34342E;
 
   --graphite-rgb: 8, 8, 8;
@@ -50,7 +50,7 @@
 
   --gold: #DDA85E;
   --gold-light: #EFC488;
-  --gold-dark: #9A7038;
+  --gold-dark: #C4914F;
   --gold-rgb: 221, 168, 94;
 
   --dusk: #6E8AA1;
@@ -217,6 +217,12 @@ h1, h2, h3 {
 
 .wordmark span { color: var(--gold-dark); }
 
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -227,14 +233,89 @@ h1, h2, h3 {
   text-decoration: none;
   font-size: 0.92rem;
   color: var(--slate);
+  transition: color 0.15s ease;
 }
 
 .nav-links a:hover { color: var(--ink); }
 
 .nav-links .nav-cta { display: inline-flex; }
 
+/* hamburger toggle — hidden on desktop */
+.nav-toggle {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  cursor: pointer;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease;
+}
+.nav-toggle:hover { border-color: var(--gold); }
+
+.nav-toggle .bars {
+  position: relative;
+  width: 16px;
+  height: 11px;
+}
+.nav-toggle .bars span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--ink);
+  border-radius: 1px;
+  transition: transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
+}
+.nav-toggle .bars span:nth-child(1) { top: 0; }
+.nav-toggle .bars span:nth-child(2) { top: 5px; }
+.nav-toggle .bars span:nth-child(3) { top: 10px; }
+
+.nav-toggle.is-open .bars span:nth-child(1) { top: 5px; transform: rotate(45deg); }
+.nav-toggle.is-open .bars span:nth-child(2) { opacity: 0; }
+.nav-toggle.is-open .bars span:nth-child(3) { top: 5px; transform: rotate(-45deg); }
+
 @media (max-width: 760px) {
-  .nav-links a:not(.nav-cta):not(.theme-toggle) { display: none; }
+  .nav-toggle { display: inline-flex; }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 20px 36px -22px rgba(0,0,0,0.4);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: max-height 0.3s ease, opacity 0.22s ease;
+  }
+
+  .nav-links.is-open {
+    max-height: 360px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links a:not(.nav-cta) {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--line);
+    font-size: 1rem;
+  }
+
+  .nav-links .nav-cta {
+    display: flex;
+    margin: 16px 20px 20px;
+    justify-content: center;
+  }
 }
 
 /* theme toggle */
@@ -425,29 +506,6 @@ h1, h2, h3 {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-}
-
-/* On narrow screens, cover-cropping a wide landscape shot hides most of
-   the mountainside. Letterbox it instead so the full photo stays visible,
-   with the scrim carried by a blurred fill behind it. This has to come
-   after every other .hero-* rule above so it actually wins the cascade. */
-@media (max-width: 700px) {
-  .hero { height: auto; min-height: 0; flex-direction: column; align-items: stretch; }
-  .hero-media { position: relative; inset: auto; background: var(--graphite); }
-  .hero-parallax-outer,
-  .hero-parallax { position: relative; inset: auto; width: 100%; height: auto; animation: none; }
-  .hero-photo {
-    position: relative;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 2;
-    object-fit: contain;
-    background: var(--graphite);
-  }
-  .hero-rain { display: none; }
-  .hero-scrim { background: linear-gradient(180deg, rgba(6,6,5,0.05) 0%, rgba(6,6,5,0.15) 60%, rgba(6,6,5,0.92) 100%); }
-  .hero .wrap { padding-top: 28px; padding-bottom: 40px; }
-  .plaque { max-width: none; }
 }
 
 /* ---------- pain grid ---------- */
@@ -1192,6 +1250,12 @@ h1, h2, h3 {
   margin-bottom: 20px;
 }
 .form-error.is-visible { display: block; }
+
+[data-theme="dark"] .form-error {
+  background: rgba(220, 90, 75, 0.16);
+  border-color: rgba(220, 90, 75, 0.45);
+  color: #FF9686;
+}
 
 /* success panel */
 .success-panel { display: none; text-align: center; padding: 40px 20px 24px; }

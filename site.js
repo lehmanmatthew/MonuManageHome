@@ -84,6 +84,44 @@
     });
   }
 
+  /* ---------------- mobile nav menu ---------------- */
+  var navToggle = document.getElementById("nav-toggle");
+  var navLinksEl = document.getElementById("nav-links");
+
+  function closeNavMenu() {
+    if (!navToggle || !navLinksEl) return;
+    navToggle.classList.remove("is-open");
+    navLinksEl.classList.remove("is-open");
+    navToggle.setAttribute("aria-expanded", "false");
+  }
+
+  if (navToggle && navLinksEl) {
+    navToggle.addEventListener("click", function () {
+      var open = navLinksEl.classList.toggle("is-open");
+      navToggle.classList.toggle("is-open", open);
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    navLinksEl.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", closeNavMenu);
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!navLinksEl.classList.contains("is-open")) return;
+      if (navLinksEl.contains(e.target) || navToggle.contains(e.target)) return;
+      closeNavMenu();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeNavMenu();
+    });
+
+    var deskQuery = window.matchMedia("(min-width: 761px)");
+    var deskListener = function (e) { if (e.matches) closeNavMenu(); };
+    if (deskQuery.addEventListener) deskQuery.addEventListener("change", deskListener);
+    else if (deskQuery.addListener) deskQuery.addListener(deskListener);
+  }
+
   /* ---------------- nav scroll state + scroll progress ---------------- */
   var navEl = document.querySelector(".nav");
   var progressEl = document.querySelector(".scroll-progress");
@@ -180,22 +218,14 @@
   /* ---------------- hero parallax (scroll-driven) ----------------
      As the page scrolls past the hero, the photo drifts and dims a touch
      faster than the page itself, and the plaque eases up and fades —
-     a quieter cousin of the mouse-driven nudge above. Skipped on the
-     mobile layout, where the hero is a static, fully-visible photo. */
+     a quieter cousin of the mouse-driven nudge above. */
   var heroMedia = document.querySelector(".hero-media");
   var plaqueEl = document.querySelector(".plaque");
-  var mobileHeroQuery = window.matchMedia("(max-width: 700px)");
 
   if (heroEl && (heroMedia || plaqueEl) && !reduceMotion) {
     var heroRaf = null;
     function updateHeroScroll() {
       heroRaf = null;
-      if (mobileHeroQuery.matches) {
-        if (heroMedia) heroMedia.style.transform = "";
-        if (heroMedia) heroMedia.style.opacity = "";
-        if (plaqueEl) { plaqueEl.style.transform = ""; plaqueEl.style.opacity = ""; }
-        return;
-      }
       var rect = heroEl.getBoundingClientRect();
       var progress = Math.min(Math.max(-rect.top / rect.height, 0), 1);
       if (heroMedia) {

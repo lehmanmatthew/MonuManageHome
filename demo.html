@@ -23,14 +23,19 @@
 <nav class="nav">
   <div class="wrap">
     <a href="index.html" class="wordmark">Monu<span>Manage</span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="index.html#product">Product</a>
       <a href="index.html#pricing">Pricing</a>
       <a href="index.html#security">Security</a>
       <a href="demo.html" class="btn btn-gold nav-cta">Request a demo</a>
+    </div>
+    <div class="nav-controls">
       <button class="theme-toggle" type="button" aria-label="Switch to dark mode">
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+      </button>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <span class="bars"><span></span><span></span><span></span></span>
       </button>
     </div>
   </div>
