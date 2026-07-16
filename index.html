@@ -3,28 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#151514">
+<meta name="color-scheme" content="light dark">
 <title>MonuManage — Software for monument and memorial companies</title>
 <meta name="description" content="Track orders, store proofs, and let families approve designs online. Published pricing, built for monument and memorial companies.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="favicon-48x48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="canonical" href="https://www.monumanage.com/">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <div class="scroll-progress" aria-hidden="true"></div>
 
-<nav class="nav">
+<nav class="nav" aria-label="Primary navigation">
   <div class="wrap">
     <a href="index.html" class="wordmark">Monu<span>Manage</span></a>
     <div class="nav-links" id="nav-links">
       <a href="#product">Product</a>
+      <a href="#workflow">How it works</a>
       <a href="#pricing">Pricing</a>
       <a href="#security">Security</a>
       <a href="demo.html" class="btn btn-gold nav-cta">Request a demo</a>
@@ -60,10 +66,16 @@
         <a href="demo.html" class="btn btn-gold">Request a demo</a>
         <a href="#pricing" class="btn btn-outline-photo">See pricing</a>
       </div>
+      <div class="hero-trust" aria-label="What MonuManage gives your team">
+        <span><strong>One record</strong> for every order</span>
+        <span><strong>Clear approvals</strong> for every proof</span>
+        <span><strong>Live status</strong> from shop to install</span>
+      </div>
     </div>
   </div>
 </header>
 
+<main id="main-content">
 <section class="section" id="problem">
   <div class="wrap">
     <div class="section-head reveal">
@@ -91,25 +103,84 @@
   </div>
 </section>
 
+<section class="section workflow-section" id="workflow">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">How work moves</p>
+      <h2>Everyone sees the next right thing.</h2>
+      <p>MonuManage keeps the office, the shop, and the family on the same page—without asking anyone to chase a spreadsheet or a voicemail.</p>
+    </div>
+    <div class="handoff-grid reveal">
+      <article class="handoff-card">
+        <span class="handoff-number">01</span>
+        <h3>Office</h3>
+        <p>Capture the family’s needs, build a clear quote, and keep the complete conversation with the order.</p>
+      </article>
+      <article class="handoff-card">
+        <span class="handoff-number">02</span>
+        <h3>Shop</h3>
+        <p>Work from the approved proof, with materials, due dates, notes, and production status in one place.</p>
+      </article>
+      <article class="handoff-card">
+        <span class="handoff-number">03</span>
+        <h3>Family</h3>
+        <p>Share a secure update at the right moment, so families never have to wonder what happens next.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section class="section section-dark" id="product">
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow on-dark">Order tracking</p>
-      <h2>One order. One record. Eight stages.</h2>
-      <p>Every order moves through the same eight stages, in order. Each change gets a timestamp and a name attached automatically, so nobody has to ask who moved what.</p>
+      <h2>Every order tells the team what happens next.</h2>
+      <p>See the complete path, the current handoff, and the work that is still waiting—all from one calm, reliable record.</p>
     </div>
-    <div class="stepper-frame reveal">
-      <div class="stepper">
-        <div class="stage"><div class="pin"></div><div class="label">Inquiry</div></div>
-        <div class="stage"><div class="pin"></div><div class="label">Design</div></div>
-        <div class="stage"><div class="pin"></div><div class="label">Proof sent</div></div>
-        <div class="stage"><div class="pin"></div><div class="label">Approved</div></div>
-        <div class="stage"><div class="pin"></div><div class="label">Production</div></div>
-        <div class="stage"><div class="pin"></div><div class="label">Ready to ship</div></div>
-        <div class="stage"><div class="pin"></div><div class="label">Installed</div></div>
-        <div class="stage"><div class="pin"></div><div class="label">Complete</div></div>
+    <div class="order-tracking reveal" aria-label="Order tracking preview for the Hollis family memorial">
+      <div class="order-tracking-head">
+        <div>
+          <p class="order-code">ORDER MM-2841</p>
+          <h3>Hollis family memorial</h3>
+        </div>
+        <p class="order-status"><span></span>In production</p>
       </div>
-      <p class="stepper-note">Search any order by customer, cemetery, date, or staff member. Every result stays inside your company's own records, never another shop's.</p>
+      <div class="order-facts">
+        <div><span>Memorial</span><strong>Black granite upright</strong></div>
+        <div><span>Cemetery</span><strong>Oak Ridge Memorial Park</strong></div>
+        <div><span>Install window</span><strong>October 14–18</strong></div>
+        <div><span>Last update</span><strong>16 minutes ago</strong></div>
+      </div>
+      <div class="order-stages" aria-label="Order stages">
+        <div class="order-stage is-done"><span>01</span><strong>Inquiry</strong><small>May 02</small></div>
+        <div class="order-stage is-done"><span>02</span><strong>Design</strong><small>May 08</small></div>
+        <div class="order-stage is-done"><span>03</span><strong>Proof sent</strong><small>May 14</small></div>
+        <div class="order-stage is-done"><span>04</span><strong>Approved</strong><small>May 17</small></div>
+        <div class="order-stage is-current" aria-current="step"><span>05</span><strong>Production</strong><small>In progress</small></div>
+        <div class="order-stage"><span>06</span><strong>Ready</strong><small>Up next</small></div>
+        <div class="order-stage"><span>07</span><strong>Installed</strong><small>Scheduled</small></div>
+        <div class="order-stage"><span>08</span><strong>Complete</strong><small>Final care</small></div>
+      </div>
+      <div class="order-workspace">
+        <div class="order-current-work">
+          <p class="mini-label">Current handoff</p>
+          <h4>Sandblast lettering and polish finish.</h4>
+          <p>The approved proof is locked to this order. Marcus has the material notes, layout, and completion photos in the same place.</p>
+          <div class="work-checklist">
+            <span class="is-complete">Proof locked</span>
+            <span class="is-complete">Material received</span>
+            <span>Quality check due Friday</span>
+          </div>
+        </div>
+        <aside class="order-history" aria-label="Latest order activity">
+          <p class="mini-label">Latest activity</p>
+          <ol>
+            <li><time>10:42 AM</time><span>Production started by Marcus Hill</span></li>
+            <li><time>Yesterday</time><span>Balance reminder sent to family</span></li>
+            <li><time>May 17</time><span>Proof approved by Evelyn Hollis</span></li>
+          </ol>
+        </aside>
+      </div>
     </div>
   </div>
 </section>
@@ -143,7 +214,7 @@
             <textarea placeholder="What should change on the proof?" rows="2"></textarea>
             <button type="button" class="send-comment">Send to shop</button>
           </div>
-          <p class="comment-sent">Sent — this appears as a comment thread directly on the order for staff to see.</p>
+          <p class="comment-sent" role="status" aria-live="polite">Sent — this appears as a comment thread directly on the order for staff to see.</p>
         </div>
       </div>
     </div>
@@ -267,19 +338,32 @@
   </div>
 </section>
 
+</main>
+
 <footer class="footer">
   <div class="wrap">
-    <a href="index.html" class="wordmark" style="color:#F1EEE6;">MonuManage</a>
-    <div class="footer-links">
-      <a href="#pricing">Pricing</a>
-      <a href="#security">Security</a>
-      <a href="demo.html">Request a demo</a>
+    <div class="footer-top">
+      <a href="index.html" class="wordmark" style="color:#F1EEE6;">MonuManage</a>
+      <div class="footer-links">
+        <a href="#pricing">Pricing</a>
+        <a href="#workflow">How it works</a>
+        <a href="#security">Security</a>
+        <a href="demo.html">Request a demo</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="footer-year">2026</span> MonuManage. All rights reserved.</p>
+      <div class="footer-legal-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="mailto:privacy@monumanage.com">privacy@monumanage.com</a>
+      </div>
     </div>
   </div>
 </footer>
 
 <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie preferences">
-  <p>This site uses local storage to remember one thing: your light/dark preference. There's no tracking or advertising, and nothing is sent to a third party. Decline and the toggle still works — it just won't stick between visits.</p>
+  <p>This site uses local storage to remember one thing: your light/dark preference. There's no tracking or advertising, and nothing is sent to a third party. Decline and the toggle still works — it just won't stick between visits. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
   <div class="cookie-actions">
     <button type="button" class="cookie-decline">Decline</button>
     <button type="button" class="cookie-accept">Accept</button>

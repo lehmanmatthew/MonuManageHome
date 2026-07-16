@@ -54,6 +54,7 @@
   function setTheme(mode) {
     if (mode === "dark") root.setAttribute("data-theme", "dark");
     else root.removeAttribute("data-theme");
+    if (toggle) toggle.setAttribute("aria-label", "Switch to " + (mode === "dark" ? "light" : "dark") + " mode");
   }
 
   function getSavedTheme() {
@@ -364,6 +365,10 @@
       });
     }
   }
+
+  /* ---------------- footer year ---------------- */
+  var yearEl = document.getElementById("footer-year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
   /* ---------------- demo form → Formspree ---------------- */
   var form = document.getElementById("demo-form");

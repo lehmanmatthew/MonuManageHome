@@ -3,28 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#151514">
+<meta name="color-scheme" content="light dark">
 <title>Request a demo — MonuManage</title>
 <meta name="description" content="Request a 30-minute demo of MonuManage, sized to your shop's order volume and location count.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="favicon-48x48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="canonical" href="https://www.monumanage.com/demo.html">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <div class="scroll-progress" aria-hidden="true"></div>
 
-<nav class="nav">
+<nav class="nav" aria-label="Primary navigation">
   <div class="wrap">
     <a href="index.html" class="wordmark">Monu<span>Manage</span></a>
     <div class="nav-links" id="nav-links">
       <a href="index.html#product">Product</a>
+      <a href="index.html#workflow">How it works</a>
       <a href="index.html#pricing">Pricing</a>
       <a href="index.html#security">Security</a>
       <a href="demo.html" class="btn btn-gold nav-cta">Request a demo</a>
@@ -41,6 +47,7 @@
   </div>
 </nav>
 
+<main id="main-content">
 <header class="demo-hero">
   <div class="wrap">
     <p class="eyebrow">Request a demo</p>
@@ -112,6 +119,11 @@
             <textarea id="message" name="message" placeholder="Multi-location reporting, the family portal, migrating from another tool..."></textarea>
           </div>
 
+          <div class="field-consent">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">I agree to be contacted about this request and to MonuManage's <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a> and <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a>.</label>
+          </div>
+
           <button type="submit" class="btn btn-gold form-submit">Request a demo</button>
           <p class="form-note">No credit card. No obligation. Just a working demo.</p>
         </form>
@@ -138,18 +150,30 @@
   </div>
 </div>
 
+</main>
+
 <footer class="footer">
   <div class="wrap">
-    <a href="index.html" class="wordmark" style="color:#F1EEE6;">MonuManage</a>
-    <div class="footer-links">
-      <a href="index.html#pricing">Pricing</a>
-      <a href="index.html#security">Security</a>
+    <div class="footer-top">
+      <a href="index.html" class="wordmark" style="color:#F1EEE6;">MonuManage</a>
+      <div class="footer-links">
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#security">Security</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="footer-year">2026</span> MonuManage. All rights reserved.</p>
+      <div class="footer-legal-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="mailto:privacy@monumanage.com">privacy@monumanage.com</a>
+      </div>
     </div>
   </div>
 </footer>
 
 <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Cookie preferences">
-  <p>This site uses local storage to remember one thing: your light/dark preference. There's no tracking or advertising, and nothing is sent to a third party. Decline and the toggle still works — it just won't stick between visits.</p>
+  <p>This site uses local storage to remember one thing: your light/dark preference. There's no tracking or advertising, and nothing is sent to a third party. Decline and the toggle still works — it just won't stick between visits. See our <a href="privacy.html">Privacy Policy</a> for details.</p>
   <div class="cookie-actions">
     <button type="button" class="cookie-decline">Decline</button>
     <button type="button" class="cookie-accept">Accept</button>
