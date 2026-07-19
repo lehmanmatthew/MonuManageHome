@@ -370,6 +370,98 @@
     }
   }
 
+  /* ---------------- pricing: table on desktop, cards on mobile ----------------
+     The <table> stays in the markup as the single source of truth (correct
+     semantics, works for screen readers and with JS off). Below 820px we
+     build a card per plan from that same data and swap which one is shown,
+     so a phone never has to scroll a five-column table sideways. */
+  var pricingScroll = document.querySelector(".pricing-scroll");
+  var pricingTable = pricingScroll ? pricingScroll.querySelector(".pricing-table") : null;
+
+  if (pricingTable) {
+    var cardsBuilt = false;
+    var cardWrap = null;
+
+    function buildPricingCards() {
+      if (cardsBuilt) return;
+
+      var headCells = pricingTable.querySelectorAll("thead th");
+      var bodyRows = pricingTable.querySelectorAll("tbody tr");
+
+      cardWrap = document.createElement("div");
+      cardWrap.className = "plan-cards";
+
+      // skip index 0: that column holds the row labels, not a plan
+      for (var i = 1; i < headCells.length; i++) {
+        var headCell = headCells[i];
+        var isFeatured = headCell.classList.contains("featured");
+
+        var card = document.createElement("div");
+        card.className = "plan-card" + (isFeatured ? " is-featured" : "");
+
+        var head = document.createElement("div");
+        head.className = "plan-card-head";
+        if (isFeatured) {
+          var badge = document.createElement("span");
+          badge.className = "plan-card-badge";
+          badge.textContent = "Most complete";
+          head.appendChild(badge);
+        }
+        head.insertAdjacentHTML("beforeend", headCell.innerHTML);
+        card.appendChild(head);
+
+        var body = document.createElement("div");
+        body.className = "plan-card-body";
+
+        bodyRows.forEach(function (row) {
+          var labelEl = row.querySelector('th[scope="row"]');
+          var cell = row.querySelectorAll("td")[i - 1];
+          if (!labelEl || !cell) return;
+
+          var text = cell.textContent.trim();
+          // long prose values stack under their label instead of beside it
+          var isProse = text.length > 24;
+
+          var line = document.createElement("div");
+          line.className = "plan-row" + (isProse ? " is-prose" : "");
+
+          var label = document.createElement("span");
+          label.className = "plan-label";
+          label.textContent = labelEl.textContent.trim();
+
+          var value = document.createElement("span");
+          value.className = "plan-value";
+          value.innerHTML = cell.innerHTML;
+
+          line.appendChild(label);
+          line.appendChild(value);
+          body.appendChild(line);
+        });
+
+        card.appendChild(body);
+        cardWrap.appendChild(card);
+      }
+
+      pricingScroll.appendChild(cardWrap);
+      cardsBuilt = true;
+    }
+
+    var mobileQuery = window.matchMedia("(max-width: 820px)");
+
+    function syncPricingView(e) {
+      if (e.matches) {
+        buildPricingCards();
+        pricingScroll.classList.add("is-mobile");
+      } else {
+        pricingScroll.classList.remove("is-mobile");
+      }
+    }
+
+    syncPricingView(mobileQuery);
+    if (mobileQuery.addEventListener) mobileQuery.addEventListener("change", syncPricingView);
+    else if (mobileQuery.addListener) mobileQuery.addListener(syncPricingView);
+  }
+
   /* ---------------- notify forms → Formspree ----------------
      Two copies of the same launch-notification form live on the
      page (hero plaque + final CTA). Each handles its own submit,
