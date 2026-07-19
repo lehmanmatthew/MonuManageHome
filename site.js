@@ -2,13 +2,6 @@
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // Mouse-parallax and the rain canvas are desktop flourishes — on a
-  // touch device they either never fire (mousemove) or just burn
-  // battery and compete with scrolling for the main thread, which is
-  // what makes the hero feel janky/heavy on phones. Treat coarse
-  // pointers and narrow viewports the same as reduced motion for
-  // those two effects.
-  var isCoarsePointer = window.matchMedia("(pointer: coarse)").matches || window.innerWidth <= 760;
 
   /* ---------------- cookie consent ----------------
      Nothing on this site tracks visitors. The only thing consent gates is
@@ -61,7 +54,6 @@
   function setTheme(mode) {
     if (mode === "dark") root.setAttribute("data-theme", "dark");
     else root.removeAttribute("data-theme");
-    if (toggle) toggle.setAttribute("aria-label", "Switch to " + (mode === "dark" ? "light" : "dark") + " mode");
   }
 
   function getSavedTheme() {
@@ -133,35 +125,21 @@
   /* ---------------- nav scroll state + scroll progress ---------------- */
   var navEl = document.querySelector(".nav");
   var progressEl = document.querySelector(".scroll-progress");
-  var navIsScrolled = false;
-  var chromeRaf = null;
 
   function onScrollChrome() {
-    chromeRaf = null;
-    var y = window.scrollY;
     if (navEl) {
-      // Hysteresis (enter above 32px, leave below 12px) instead of a
-      // single threshold, so scroll jitter right at one value can't
-      // flip the class back and forth every frame.
-      if (!navIsScrolled && y > 32) {
-        navIsScrolled = true;
-        navEl.classList.add("is-scrolled");
-      } else if (navIsScrolled && y < 12) {
-        navIsScrolled = false;
-        navEl.classList.remove("is-scrolled");
-      }
+      if (window.scrollY > 8) navEl.classList.add("is-scrolled");
+      else navEl.classList.remove("is-scrolled");
     }
     if (progressEl) {
       var doc = document.documentElement;
       var max = doc.scrollHeight - doc.clientHeight;
-      var pct = max > 0 ? (y / max) * 100 : 0;
+      var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
       progressEl.style.width = pct + "%";
     }
   }
   onScrollChrome();
-  window.addEventListener("scroll", function () {
-    if (!chromeRaf) chromeRaf = requestAnimationFrame(onScrollChrome);
-  }, { passive: true });
+  window.addEventListener("scroll", onScrollChrome, { passive: true });
 
   /* ---------------- button ripple ---------------- */
   if (!reduceMotion) {
@@ -206,7 +184,7 @@
   var heroOuter = document.querySelector(".hero-parallax-outer");
   var heroEl = document.querySelector(".hero");
 
-  if (heroOuter && heroEl && !reduceMotion && !isCoarsePointer) {
+  if (heroOuter && heroEl && !reduceMotion) {
     var targetX = 0, targetY = 0, curX = 0, curY = 0;
     var raf = null;
 
@@ -265,9 +243,14 @@
     updateHeroScroll();
   }
 
-  /* ---------------- rain over the hero photo ---------------- */
+  /* ---------------- rain over the hero photo ----------------
+     Skipped on small screens: a continuously animating canvas is
+     the most expensive thing on the page, and on a phone the
+     Ken Burns drift carries the hero fine on its own. */
   var canvas = document.getElementById("hero-rain");
-  if (canvas && !reduceMotion && !isCoarsePointer) {
+  var smallScreen = window.matchMedia("(max-width: 760px)").matches;
+  if (canvas && smallScreen) canvas.remove();
+  if (canvas && !reduceMotion && !smallScreen) {
     var ctx = canvas.getContext("2d");
     var drops = [];
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -387,25 +370,24 @@
     }
   }
 
-  /* ---------------- footer year ---------------- */
-  var yearEl = document.getElementById("footer-year");
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
-
-  /* ---------------- demo form → Formspree ---------------- */
-  var form = document.getElementById("demo-form");
-  if (form) {
-    var card = document.getElementById("form-card");
-    var errorBox = document.getElementById("form-error");
-    var submitBtn = form.querySelector(".form-submit");
+  /* ---------------- notify forms → Formspree ----------------
+     Two copies of the same launch-notification form live on the
+     page (hero plaque + final CTA). Each handles its own submit,
+     shows its own success state, and never navigates away. */
+  document.querySelectorAll(".notify-form").forEach(function (form) {
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var emailInput = form.querySelector('input[type="email"]');
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+      form.classList.remove("has-error");
+
       if (!form.checkValidity()) {
         form.reportValidity();
         return;
       }
 
-      if (errorBox) errorBox.classList.remove("is-visible");
+      var originalLabel = submitBtn ? submitBtn.textContent : "";
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<span class="spinner"></span> Sending…';
@@ -418,17 +400,16 @@
       })
         .then(function (response) {
           if (response.ok) {
-            card.classList.add("submitted");
-            var successPanel = document.getElementById("success-panel");
-            if (successPanel) successPanel.scrollIntoView({ behavior: "smooth", block: "center" });
+            form.classList.add("is-done");
           } else {
             throw new Error("Request failed");
           }
         })
         .catch(function () {
-          if (errorBox) errorBox.classList.add("is-visible");
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Request a demo"; }
+          form.classList.add("has-error");
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
+          if (emailInput) emailInput.focus();
         });
     });
-  }
+  });
 })();
